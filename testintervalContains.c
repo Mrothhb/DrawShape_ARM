@@ -1,9 +1,9 @@
 /*
  * Filename: testintervalContains.c
- * Author: TODO
- * UserId: TODO
- * Date: TODO
- * Sources of Help: TODO
+ * Author: Matt Roth
+ * UserId: cs30xgs
+ * Date: April 12, 2019
+ * Sources of Help: Lecture notes, cse 30 website, texbook. 
  */ 
 
 #include <stdio.h>
@@ -23,6 +23,7 @@
  * Returns 0 otherwise.
  */
 void testintervalContains() {
+
 
   /* Test interval containing the value */
   TEST( intervalContains( 0, 2, 1 ) == 1 );
