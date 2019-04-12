@@ -21,14 +21,14 @@
  **/
 void testoutputChar() {
 
-  outputChar('a');  //single test case for one character
-  outputChar('0');  //test zero case
-  outputChar('\n'); //test newline 
-  outputChar("aa"); //string test
-  outputChar('#');  //test symbols
-  outputChar(' '); //test empty 
-  outputChar("");  //test empty string
-  outputChar('\0');  //test null char
+  outputChar('a');    // single test case for one character
+  outputChar('0');    // test zero case
+  outputChar('\n');   // test newline 
+  outputChar("aa");   // string test
+  outputChar('#');    // test symbols
+  outputChar(' ');    // test empty 
+  outputChar("");     // test empty string
+  outputChar('\0');   // test null char
   
   /*
    * TODO: YOU MUST WRITE MORE TEST CASES FOR FULL POINTS!
