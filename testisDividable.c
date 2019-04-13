@@ -33,7 +33,7 @@ void testisDividable() {
   TEST(isDividable(6,-6) == 1);  // same operand negative divisor
   TEST(isDividable(5,-6) == 0);  // smaller dividend negative divisor
   TEST(isDividable(-5,6) == 0);  // smaller dividend negative 
-  TEST(isDividable(-6,-6) == 1);  // same operand both negative 
+  TEST(isDividable(-6,-6) == 1); // same operand both negative 
 
  }
 

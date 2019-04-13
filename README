@@ -1,0 +1,161 @@
+/*
+ * Filename: README
+ * Author: Matt Roth 
+ * Userid: cs30x99
+ * Date: April 12, 2019
+ * Sources of help: Harris Textbook, lecture notes, discussion notes, website
+ */
+
+------------------------------------------------------------[  DESCRIPTION  ]--
+
+This program takes in 2 inputs from the command line and prints a Cool S 
+design to stdout. The first input will be the size of the Cool S (4n + 3) is
+the designated format for size, and the second input will be the character to 
+display inside of the Cool S. 
+
+------------------------------------------------------------[  COMPILATION  ]--
+
+Compilation is made easy through the use of the Make utility. A file included
+with the source called Makefile specifies how to derive the target program.
+
+To compile the program, simply do the following in a Linux terminal:
+
+	$ make 
+
+If generating new .o files for execution use the following command:
+
+	$make new 
+
+	or
+
+	$make clean 
+
+To run the program after make has finished, type the following:
+
+	$ ./pa1
+
+------------------------------------------------------------[ SAMPLE OUTPUT ]--
+
+An example of normal output... (on stdout)
+
+$ ./a.out 1 3 5
+
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+25
+27
+29
+
+29
+27
+25
+23
+21
+19
+17
+15
+13
+11
+9
+7
+5
+3
+1
+
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+25
+27
+29
+
+The integer average of (1 + 3 + 5) / 3 = 3
+
+An example of abnormal output... (on stderr)
+
+$ ./a.out 1 2
+
+Usage: ./a.out v1 v2 v3
+Prints arrays forward and in reverse, prints the average of v1, v2, v3
+
+------------------------------------------------------------[    TESTING    ]--
+
+I tested my program by comparing its output against the pa0test solution 
+contained in the public directory.
+
+Some specific test cases I tried on the executable:
+  * Negative numbers
+  * Very small / very large numbers to test number parsing range
+  * Inputting too few arguments or too many arguments
+  * Numbers with non-digit characters, e.g. ab23, or abs#$
+
+------------------------------------------------------------[   QUESTIONS   ]--
+VimDiff Questions
+
+1. Q: Spot the 3 differences between average3V1.s and average3V3.s using 
+   vimdiff and document them as the answer to this README question. Be clear 
+   about the location of the differences.
+   A: The three differences between the average3V1.s and average3V2.s is
+      1) at line 42 in average3V2.s is missing the line: add fp,sp,FP_OFFSET
+      2) at line 48 in average3V2.s there is an extra tab indentation
+      3) at line 56 in average3V2.s the {pc,fp} is swapped ( should be {fp,pc})
+     
+C Questions
+
+2. Q: What line of code needs to be added on line 4 to make the program print?
+   A: *x *= 3;
+ 
+3. Q: We have an executable called s. If it is run with the following command,
+   what will thevalue of argc in main() be? Why?
+   A: The value of argc will be 7 ( argv[0] = ./s , argv[1] = html, ... )
+   because argc is the argument count, or the number of strings pointed tob by
+   argv.
+
+Vim Questions
+
+4. Q: (a) What command do you use to delete a single line at the current cursor?
+   (b) What about n number of lines (including the line at the current cursor)?
+   A: (a) dd
+      (b) ndd
+
+5. Q: (a) Which command would you use to copy a line at the current cursor?
+      (b) Then which command to "paste" the copied line to after the cursor?
+   A: (a) yy or Y  (b) p
+
+6. Q: a) Which command would you use to show line numbers? (b) Which command to
+   hide line numbers?
+   A: (a) :set nu (b) :set nu!
+
+7. Q: (a) Which command would you use to move the cursor to line x? (b) Which 
+   command to go to the first line of the file?  (c) Which command to go to the
+   last line of the file?     
+   A: (a) xG (b) gg (c) G
+
+8. Q:(a) Which command would you use to jump the cursor 10 lines down? (b) 
+   Which command to jump 10 lines up? lines up?
+   A: (a) 10k (b) 10j
+
+Git Questions
+
+9. Q: What is the Git command to display differences between the local version
+   of a file and the version last committed?
+

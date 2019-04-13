@@ -32,12 +32,6 @@ void testmyRem() {
   TEST(myRem( 2, 2 ) == 0);   // test dividend == divisor 
   TEST(myRem( -6, -6 ) == 0); // test negative dividend and divisor 
   
-  /*
-   * TODO: YOU MUST WRITE MORE TEST CASES FOR FULL POINTS!
-   *
-   * Some things to think about are error cases, extreme cases, normal cases,
-   * abnormal cases, etc.
-   */
 }
 
 

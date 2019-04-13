@@ -29,14 +29,8 @@ void testoutputChar() {
   outputChar(' ');    // test empty 
   outputChar("");     // test empty string
   outputChar('\0');   // test null char
-  
-  /*
-   * TODO: YOU MUST WRITE MORE TEST CASES FOR FULL POINTS!
-   *
-   * Some things to think about are error cases, extreme cases, normal cases,
-   * abnormal cases, etc.
-   */
-}
+ 
+ }
 
 
 int main( void ) {
