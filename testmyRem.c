@@ -1,4 +1,4 @@
-/*TEST
+/*
  * Filename: testmyRem.c
  * Author: Matt Roth
  * UserId: cs30xgs
