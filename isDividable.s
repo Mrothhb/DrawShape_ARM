@@ -8,7 +8,7 @@
  */
 
 @ Raspberry Pi directives
-	.cpu	cortex-a53	@Version of our Pis
+	.cpu	cortex-a53	@ Version of our Pis
 	.syntax	unified		@ Modern ARM syntax
 
 	.equ	FP_OFFSET, 4	@ Offset from sp to set fp
@@ -42,13 +42,13 @@ isDividable:
 					@ Uses 4, from (#_of_regs_saved - 1)*4.
 
 	cmp	r1, 0			@ check if divisor is zero 
-	moveq	r0,-1			@ return the -1 if divisor it zero
+	moveq	r0, -1			@ return the -1 if divisor it zero
 	bleq	done			@ branch to done if equality
 
 	bl	myRem			@ call myRem function to get remainder
-	cmp	r0,0			@ check if the remainder is zero
-	moveq	r0,1			@ return 1 since its dividable
-	movne	r0,0			@ if the remainder is not zero r0=0
+	cmp	r0, 0			@ check if the remainder is zero
+	moveq	r0, 1			@ return 1 since its dividable
+	movne	r0, 0			@ if the remainder is not zero r0=0
 done:
 					@ do nothing and return  
 @ Standard epilogue

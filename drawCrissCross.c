@@ -1,13 +1,16 @@
 /*
  * Filename: drawCrissCross.c
- * Author: TODO: Enter your name
- * UserId: TODO: Enter your cs30x login id
- * Date: TODO: Enter the date you first modified this file
- * Sources of Help: TODO: List all the people, books, websites, etc. that you
- *                  used to help you write the code in this source file.
+ * Author: Matt Roth
+ * UserId: cs30xgs
+ * Date: April 12, 2019
+ * Sources of Help: Textbook, cse 30 wbesite, lecture notes, discussion notes.
  */
 
+#include <stdio.h>
+
 #include "pa1.h"
+#include "test.h"
+
 
 /*
  * Function name: drawCrissCross()

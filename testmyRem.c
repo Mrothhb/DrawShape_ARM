@@ -20,18 +20,20 @@
  *
  **/
 void testmyRem() {
-
-  TEST(myRem( 6, 3 ) == 0);   // test dividend > divisor 
-  TEST(myRem( 3, 6 ) == 3);   // test dividend < divisor 
-  TEST(myRem( 0, 0 ) == 0);   // test zero zero case
-  TEST(myRem( 6, 1 ) == 0);   // test mod one case
-  TEST(myRem( 6, 0 ) == 0);   // test zero case TODO fails
-  TEST(myRem( 0, 6 ) == 0);   // test 0 mod with divisor case
-  TEST(myRem(-6, 5 ) == -1);  // test negative dividend case
-  TEST(myRem( 6, -5 ) == 1);  // test negative divisor case 
-  TEST(myRem( 2, 2 ) == 0);   // test dividend == divisor 
-  TEST(myRem( -6, -6 ) == 0); // test negative dividend and divisor 
   
+  int charA = 'a';
+  char charSym = 0x7E;
+
+  TEST(myRem( 6, 3 ) == 6 % 3);   // test dividend > divisor 
+  TEST(myRem( 3, 6 ) == 3 % 6);   // test dividend < divisor 
+  TEST(myRem( 6, 1 ) == 6 % 1);   // test mod one case
+  TEST(myRem( 0, 6 ) == 0 % 6);   // test 0 mod with divisor case
+  TEST(myRem(-6, 5 ) == -6 % 5);  // test negative dividend case
+  TEST(myRem( 6, -5 ) == 6 % -5);  // test negative divisor case 
+  TEST(myRem( 2, 2 ) == 2 % 2);   // test dividend == divisor 
+  TEST(myRem( -6, -6 ) == -6 % -6); // test negative dividend and divisor 
+  TEST(myRem(charA,charSym ) == charA % charSym); // test local variables  
+
 }
 
 

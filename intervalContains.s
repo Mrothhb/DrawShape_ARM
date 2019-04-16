@@ -8,7 +8,7 @@
  */
 
 @ Raspberry Pi directives
-	.cpu	cortex-a53		@Version of our Pis
+	.cpu	cortex-a53		@ Version of our Pis
 	.syntax	unified			@ Modern ARM syntax
 
 	.equ	FP_OFFSET, 4		@ Offset from sp to set fp
@@ -43,15 +43,15 @@ intervalContains:
  	push	{fp, lr}		@ Save registers: fp, lr
 	add	fp, sp, FP_OFFSET	@ Set fp to base of saved registers
 					@ Uses 4, from (#_of_regs_saved - 1)*4.
-	cmp	r0,r1			@ comparison between the parameters
-	movgt	r0,-1			@ return -1 if start > end
+	cmp	r0, r1			@ comparison between the parameters
+	movgt	r0, -1			@ return -1 if start > end
 	bgt	done			@ exit program
 
-	cmp	r2,r0			@ if value < start return 0
-	movlt	r0,0			@ if value < start move 0 into return
+	cmp	r2, r0			@ if value < start return 0
+	movlt	r0, 0			@ if value < start move 0 into return
 	blt	done			@ return and exit
 
-	cmp	r2,r1			@ compare value and end
+	cmp	r2, r1			@ compare value and end
 	movgt	r0,0			@ if value > end move 0 into return
 	bgt	done			@ return and exit
 

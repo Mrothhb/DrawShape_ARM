@@ -8,13 +8,13 @@
  */
 
 @ Raspberry Pi directives
-	.cpu	cortex-a53	@Version of our Pis
+	.cpu	cortex-a53	@ Version of our Pis
 	.syntax	unified		@ Modern ARM syntax
 
 	.equ	FP_OFFSET, 4	@ Offset from sp to set fp
 	
-	.section .rodata	@ROData asm directive for .rodata
-fmt:	.asciz "%c"		@ The character to format 	
+	.section .rodata	@ ROData asm directive for .rodata
+fmt:	.asciz "%c"		@ The character to format 
 
 	.global	outputChar	@ Specify outputChar as a global symbol
 

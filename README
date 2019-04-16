@@ -158,4 +158,7 @@ Git Questions
 
 9. Q: What is the Git command to display differences between the local version
    of a file and the version last committed?
+   A: use the command:  git diff HEAD^ HEAD [filename] 
+
+
 
