@@ -23,7 +23,7 @@
 	.equ	CAP_SIZE_OFFSET, -32		@ size of the cap for Cool S
 	.equ	I_OFFSET, -36			@ iterator 
 @ Constants for parameters
-	.equ	PARAM_SPACE, 16			@ allocate space for the params
+	.equ	PARAM_SPACE, 16			@ allocate space for 3 params
 	.equ	SIZE_OFFSET, -40		@ size of Cool S
 	.equ	FILL_CHAR_OFFSET, -44		@ the char to fill in CoolS
 	.equ	DIRECTION_OFFSET, -48		@ the direction parameter
@@ -35,12 +35,12 @@
 	.equ	DIR_UP, 0			@ upward direction
 	.equ	DIR_DOWN, 1			@ downward direction
 @ Cool S whitespace, tip, and border charaters
-	.equ	SPACE_CHAR, 0x20		@ the space character
-	.equ	NEWLINE_CHAR, 0x0A		@ the newline character
-	.equ	FORWARD_SLASH_CHAR, 0x2f	@ the forward slash character
-	.equ	BACK_SLASH_CHAR, 0x5C		@ the backslash char
-	.equ	CARAT_CHAR, 0x5E		@ the carat character
-	.equ	V_CHAR, 0x76			@ the v character
+	.equ	SPACE_CHAR, ' '			@ the space character
+	.equ	NEWLINE_CHAR, '\n'		@ the newline character
+	.equ	FORWARD_SLASH_CHAR, '/'		@ the forward slash character
+	.equ	BACK_SLASH_CHAR, '\'		@ the backslash char
+	.equ	CARAT_CHAR, '^'			@ the carat character
+	.equ	V_CHAR, 'v'			@ the v character
 
 	.global	drawCap				@ Specify drawCap as a global 
 						@ symbol
@@ -62,7 +62,7 @@
  * Side Effects: None.
  * Error Conditions: None.
  * Registers used;
- 	TODO
+ 	TODO 
  *	r0 - arg 1 -- the parameter size, and return value.
  *	r1 - arg 2 -- the parameter fillChar.
  *	r2 - arg 3 -- the parameter direction.
@@ -87,16 +87,18 @@ drawCap:
 	str	r1, [fp, FILL_CHAR_OFFSET]	@ store the fillChar param
 	str	r2, [fp, DIRECTION_OFFSET]	@ store the direction param
 @ initialize the cap size 
-	ldr	r0, [fp, SIZE_OFFSET]		@ load the size into register r3
-	mov	r3, HALF_DIVISOR		@ move 2 into r3 for division
-	sdiv	r3, r0, r3			@ divide the size in half
+	ldr	r3, [fp, SIZE_OFFSET]		@ load the size into register r3
+	mov	r2, HALF_DIVISOR		@ move 2 into r3 for division
+	sdiv	r3, r3, r2			@ divide size / 2
 	str	r3, [fp, CAP_SIZE_OFFSET]	@ store the capsize on stack
 
 @ Start drawing the top Cap
-	cmp	r0, DIR_UP	 		@ direction comparison for equal
-	bne	else1				@ branch to else block
+	ldr	r3, [fp, DIRECTION_OFFSET]	@ load the direction variable 
+	cmp	r3, DIR_UP	 		@ if(direction == DIR_UP)
+						@ (backward logic) 
+	bne	direction_else			@ branch if not equal 
 @ Start if block 	
-	mov	r3, CARAT_CHAR			@ move the '^' into r3
+	mov	r3, CARAT_CHAR 			@ move the '^' into r3
 	str	r3, [fp, TIP_CHAR_OFFSET]	@ store '^' into memory at 
 						@ the tipChar variable 
 	mov	r3, FORWARD_SLASH_CHAR		@ move the '/' into r3
@@ -117,11 +119,11 @@ drawCap:
 	mov	r3, 1				@ move 1 into the r3 register
 	str	r3, [fp, INCR_OFFSET]		@ store the increment value in
 						@ memory
-	b	end_if1				@ branch to skip the else block
+	b	direction_end_if		@ branch to skip the else block
 @ End of If block
 
 @ Start else block Drawing bottom of cap	
-else1:
+direction_else:
 	mov	r3, V_CHAR			@ move the 'v' char into r3
 	str	r3, [fp, TIP_CHAR_OFFSET]	@ store the char 'v' into the
 						@ tpChar variable in memory
@@ -139,21 +141,23 @@ else1:
 	mov	r3, -1				@ move -1 into the r3 register
 	str	r3, [fp, END_ITER_OFFSET]	@ store -1 into the endIter
 						@ variable into memory
+	mov	r3, -1				@ inrr = -1;		
 	str	r3, [fp, INCR_OFFSET]		@ store -1 into the increment
-@ End of else block		
-end_if1:
+
+@ end of if direction if-else block		
+direction_end_if:
 
 @ Start drawing the Cap 
 	ldr	r3, [fp, START_ITER_OFFSET]	@ load the startIter variable 
 						@ from memory into r3 
 	str	r3, [fp, I_OFFSET]		@ store the r3 value containing
-	 					@ into the increment value in 
-						@ memory
-@ Start the while loop with condition ( i != endIter )
+	 					@ i = startItr;
+						@ Start the while loop with 
+						@ condition ( i != endIter )
 	ldr	r3, [fp, I_OFFSET]		@ load the iterator i into r3
 	ldr	r2, [fp, END_ITER_OFFSET]	@ load the value of endIter into
 						@ r2 register to use in the loop
-	cmp	r3, r2				@ compare i to endIter
+	cmp	r3, r2				@ while( i != endIter) 
 	beq	end_loop			@ branch out of the loop
 
 loop:
@@ -161,56 +165,58 @@ loop:
 	mov	r0, SPACE_CHAR			@ the first parameter to 
 						@ outputCharNTimes
 	ldr	r1, [fp, CAP_SIZE_OFFSET]	@ load in capSize variable
-	sub	r1, r1, r3			@ capSize - i, and load into r1
+	ldr	r3, [fp, I_OFFSET]		@ load i into r3
+	sub	r1, r1, r3			@ capSize - i
 
-	b	outputCharNTimes		@ branch to outputCharNTimes 
-						@ with args SPACE_CHAR and 
-						@ capSize - i
+	bl	outputCharNTimes		@ branch to outputCharNTimes 
+						@ outputCharNTimes(SPACE_CHAR,
+						@		capSize - i);	
 @ Draw the actual content, conditionally the tip
 @ if its the first/last iteration
+	ldr	r3, [fp, I_OFFSET]		@ load i into r3
 	cmp	r3, 0				@ if (i == 0)
-	bne	else2				@ skip to else 
+	bne	final_output_else		@ skip to else 
 	ldr	r0, [fp, TIP_CHAR_OFFSET]	@ load tipChar variable into r0
-						@ if i == 0
-	b	outputChar			@ branch to outputChar with 
-						@ arguement in r0 (tipChar)
-	b	end_if2				@ skip else block	
+	bl	outputChar			@ outputChar(tipChar)
+	b	final_output_end_if		@ skip else block	
 
-else2:
+final_output_else:
 	ldr	r0, [fp, L_SLASH_CHAR_OFFSET]	@ load the 1st call to 
 						@ outputChar with leftSlashChar
-	b	outputChar			@ branch to outputChar 
-
+	bl	outputChar			@ outputChar(leftSlashChar); 
 	ldr	r0, [fp, FILL_CHAR_OFFSET]	@ load in the second call 
 						@ to outputChar 
 	ldr	r1, [fp, I_OFFSET]		@ DOUBLE * i -1 load in i
 	mov	r2, DOUBLE			@ move 2 into r2 for multiply
 	mul	r1, r1, r2
 	sub	r1, r1, 1			@ subtract 1 from DOUBLE * i
-	b	outputCharNTimes		@ call outputCharNTimes with
-						@ ( fillChar, DOUBLE * i -1)
+	bl	outputCharNTimes		@ outputCharNTimes(fillChar, 
+						@		  DOUBLE*i - 1);
 	ldr	r0, [fp, R_SLASH_CHAR_OFFSET]	@ load the '/' into r0
-	b	outputChar			@ call outputChar ( '/' )
-end_if2:
+	bl	outputChar			@ outputChar(rightSlashChar);
+@ End of final_output if-else block
+final_output_end_if:
 
-@Draw the trailing whitespace
+@ Draw the trailing whitespace
 	mov	r0, SPACE_CHAR
 	ldr	r1, [fp, CAP_SIZE_OFFSET]	@ load in r1 capSize 
-	ldr	r3, [fp, I_OFFSET]		@ load in i to r3
-	sub	r1, r1, r3			@ capSize - i
-	b	outputCharNTimes		@ call outputChar with args TODO
-	mov	r0, NEWLINE_CHAR		@ argument for outputChar
-	b	outputChar			@ TODO
+	ldr	r2, [fp, I_OFFSET]		@ load in i to r2
+	sub	r1, r1, r2			@ capSize - i
+	bl	outputCharNTimes		@ outputCharNTimes(SPACE_CHAR,
+						@		capSize -i );
+	mov	r0, NEWLINE_CHAR		@ move the '\n' int r0
+	bl	outputChar			@ outputChar(NEWLINE_CHAR); 
 
-@ Loop increment conditions
+@ Loop increment conditions i = i + incr
 	ldr	r1, [fp, INCR_OFFSET]		@ load in the increment value to
 						@ r1 
-	ldr	r2, [fp, END_ITER_OFFSET]	@ load the endIter into r2
-	ldr	r3, [fp, I_OFFSET]		@ load in i to increment value
+	ldr	r3, [fp, I_OFFSET]		@ load i into r3
 	add	r3, r3, r1			@ increment i with incr
-	
-	cmp	r3, r2				@ compare i to endIter
-	bne	loop				@ branch if i != endIter
+	str	r3, [fp, I_OFFSET]		@ i += incr;	
+	ldr	r3, [fp, I_OFFSET]		@ load i for the loop compare
+	ldr	r2, [fp, END_ITER_OFFSET]	@ load endIter to r2
+	cmp	r3, r2				@ while( i != endIter )
+	bne	loop				@ branch back to the loop start
 
 end_loop:
 
