@@ -32,8 +32,8 @@ fmt:	.asciz "%c"		@ The character to format
  * Return Value: None.
  *
  * Registers used:
- *	r0 - arg 1 -- the formatted string literal 
- *	r1 - arg 2 -- the parameter char 
+ *	r0 - arg 1 -- the char parameter and the fmt: char to display
+ *	r1 - arg 2 -- the char to display
  */
 
 outputChar:

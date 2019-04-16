@@ -33,9 +33,9 @@
  * Return Value: None.
  *
  * Registers used:
- *	r0 - arg 1 -- start parameter, and return value -1, 0 or 1. 
- *	r1 - arg 2 -- end parameter.
- *	r2 - arg 3 -- the value.
+ *	r0 - arg 1 -- start parameter for interval, and return value -1, 0 or 1.
+ *	r1 - arg 2 -- end parameter for the interval.
+ *	r2 - arg 3 -- the value to find inside of the interval.
  */
 
 intervalContains:

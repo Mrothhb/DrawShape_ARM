@@ -13,7 +13,7 @@
  **/
 void testdrawCap() {
   
-  drawCap(3,'d',3);
+  drawCap(10,'d',0);
   
 }
 

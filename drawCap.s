@@ -2,7 +2,7 @@
  * Filename: drawCap.s
  * Author: Matt Roth 
  * UserId: cs30xgs
- * Date: April 12, 2019
+ * Date: April TODO, 2019
  * Sources of Help: Textbook, lecture notes, and discussion section notes.
  *
  */
@@ -38,7 +38,7 @@
 	.equ	SPACE_CHAR, ' '			@ the space character
 	.equ	NEWLINE_CHAR, '\n'		@ the newline character
 	.equ	FORWARD_SLASH_CHAR, '/'		@ the forward slash character
-	.equ	BACK_SLASH_CHAR, '\'		@ the backslash char
+	.equ	BACK_SLASH_CHAR, '\\'		@ the backslash char
 	.equ	CARAT_CHAR, '^'			@ the carat character
 	.equ	V_CHAR, 'v'			@ the v character
 
@@ -58,14 +58,14 @@
  * will be displayed based on the user-supplied values.
  * Parameters: size - the size of the Cool S
  	       fillChar -  the fill in character 
-	       direction - TODO
+	       direction - which orientation the cap will be
  * Side Effects: None.
  * Error Conditions: None.
- * Registers used;
- 	TODO 
+ * Registers used:
  *	r0 - arg 1 -- the parameter size, and return value.
  *	r1 - arg 2 -- the parameter fillChar.
  *	r2 - arg 3 -- the parameter direction.
+ *	r3 - temporary storage register for algorithms and computational tasks.
  */
 
 drawCap:
@@ -86,7 +86,7 @@ drawCap:
 	str	r0, [fp, SIZE_OFFSET]		@ store size param
 	str	r1, [fp, FILL_CHAR_OFFSET]	@ store the fillChar param
 	str	r2, [fp, DIRECTION_OFFSET]	@ store the direction param
-@ initialize the cap size 
+@ Initialize the cap size 
 	ldr	r3, [fp, SIZE_OFFSET]		@ load the size into register r3
 	mov	r2, HALF_DIVISOR		@ move 2 into r3 for division
 	sdiv	r3, r3, r2			@ divide size / 2
@@ -120,7 +120,6 @@ drawCap:
 	str	r3, [fp, INCR_OFFSET]		@ store the increment value in
 						@ memory
 	b	direction_end_if		@ branch to skip the else block
-@ End of If block
 
 @ Start else block Drawing bottom of cap	
 direction_else:
@@ -144,7 +143,7 @@ direction_else:
 	mov	r3, -1				@ inrr = -1;		
 	str	r3, [fp, INCR_OFFSET]		@ store -1 into the increment
 
-@ end of if direction if-else block		
+@ end of direction if-else block		
 direction_end_if:
 
 @ Start drawing the Cap 
@@ -170,9 +169,9 @@ loop:
 
 	bl	outputCharNTimes		@ branch to outputCharNTimes 
 						@ outputCharNTimes(SPACE_CHAR,
-						@		capSize - i);	
+						@		capSize - i);
+
 @ Draw the actual content, conditionally the tip
-@ if its the first/last iteration
 	ldr	r3, [fp, I_OFFSET]		@ load i into r3
 	cmp	r3, 0				@ if (i == 0)
 	bne	final_output_else		@ skip to else 
@@ -192,8 +191,9 @@ final_output_else:
 	sub	r1, r1, 1			@ subtract 1 from DOUBLE * i
 	bl	outputCharNTimes		@ outputCharNTimes(fillChar, 
 						@		  DOUBLE*i - 1);
-	ldr	r0, [fp, R_SLASH_CHAR_OFFSET]	@ load the '/' into r0
+	ldr	r0, [fp, R_SLASH_CHAR_OFFSET]	@ load the '\' into r0
 	bl	outputChar			@ outputChar(rightSlashChar);
+
 @ End of final_output if-else block
 final_output_end_if:
 

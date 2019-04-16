@@ -24,6 +24,10 @@ void testisDividable() {
 
   char hex1 = 0x62;    // hex for 'b' int is 98
   int valuea = 'a';    // int for 'a'
+  int i;
+  int j = BUFSIZ;
+  int i_divide_by_j;
+  int remainder;
 
   TEST(isDividable( 6, 6) == 1); // same value test
   TEST(isDividable( 5, 6) == 0); // smaller dividend but not dividable  
@@ -37,10 +41,17 @@ void testisDividable() {
   TEST(isDividable(-5,6) == 0);  // smaller dividend negative 
   TEST(isDividable(-6,-6) == 1); // same operand both negative 
   TEST(isDividable(hex1,valuea) == 0); // try to test chars
-  
 
+  // load test  
+  for ( i = 1; i < BUFSIZ; i++) {
+    i_divide_by_j = i/j;
+    remainder = i%j;
+    TEST(isDividable( i, j ) == ((i%j)==0));
+    printf(" i = %d \n j = %d \n i/j = %d \n remainder = %d \n", i, j, 
+                                        i_divide_by_j, remainder ); 
+    j--;
+   }
  }
-
 
 int main( void ) {
 

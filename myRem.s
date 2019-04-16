@@ -31,10 +31,10 @@
  * Return Value: The remainder
  *
  * Registers used:
- *	r0 - arg 1 -- the dividend
- *	r1 - arg 2 -- the divisor
- *	r2 - local var -- the quotient
- *	r3 - local var -- temp holder for result of mul
+ *	r0 - arg 1 -- the dividend of the expression.
+ *	r1 - arg 2 -- the divisor of the expression.
+ *	r2 - local var -- the quotient.
+ *	r3 - local var -- temp holder for result of multiplication.
  */
 
 myRem:

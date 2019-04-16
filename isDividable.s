@@ -31,8 +31,8 @@
  * Return Value: -1 if error, 1 if dividable, 0 if not dividable.
  *
  * Registers used:
- *	r0 - arg 1 -- the dividend and the return value 1, or 0 or -1.
- *	r1 - arg 2 -- the divisor 
+ *	r0 - arg 1 -- the dividend of the expressionand the return value.
+ *	r1 - arg 2 -- the divisor of the expression. 
  */
 
 isDividable:
