@@ -23,12 +23,12 @@
  * Return Value: None
  */
 void drawCrissCross( int size, char fillChar ) {
-  
+  int i;
   // Calculate thickness of the Cool S
   int thickness = size / HALF_DIVISOR - 1;
 
   // Print top portion of criss-cross pattern
-  for (int i = 0; i < thickness / HALF_DIVISOR + 1; i++) {
+  for (i = 0; i < thickness / HALF_DIVISOR + 1; i++) {
     // Initial whitespace to indent the pattern
     outputCharNTimes(SPACE_CHAR, i);
 
@@ -47,7 +47,7 @@ void drawCrissCross( int size, char fillChar ) {
   }
 
   // Print bottom portion of criss-cross pattern
-  for (int i = thickness / HALF_DIVISOR; i >= 0; i--) {
+  for ( i = thickness / HALF_DIVISOR; i >= 0; i--) {
     // Initial whitespace to indent the pattern
     outputCharNTimes(SPACE_CHAR, i);
 

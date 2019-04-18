@@ -2,7 +2,7 @@
  * Filename: outputChar.s
  * Author: Matt Roth 
  * UserId: cs30xgs
- * Date: April 12, 2019
+ * Date: April 17, 2019
  * Sources of Help: Textbook, lecture notes, and discussion section notes.
  *
  */
@@ -38,13 +38,13 @@ fmt:	.asciz "%c"		@ The character to format
 
 outputChar:
 @ Standard prologue
- 	push	{fp, lr}		@ Save registers: fp, lr
+	push	{fp, lr}		@ Save registers: fp, lr
 	add	fp, sp, FP_OFFSET	@ Set fp to base of saved registers
 					@ Uses 4, from (#_of_regs_saved - 1)*4.
 
-	mov 	r1, r0			@ Moves char param to r1 as arg to 
-	ldr 	r0, =fmt		@ Get address of format string.
-	bl	printf	 		@ Calls printf 
+	mov	r1, r0			@ Moves char param to arg2 
+	ldr	r0, =fmt		@ Get address of format string.
+	bl	printf	 		@ Calls printf("%c", fmt); 
 
 @ Standard epilogue
 	sub	sp, fp, FP_OFFSET	@ Set sp to top of saved registers

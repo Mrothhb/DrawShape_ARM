@@ -2,7 +2,7 @@
  * Filename: outputCharNTimes.c
  * Author: Matt Roth
  * UserId: cs30xgs
- * Date: April 12, 2019
+ * Date: April 17, 2019
  * Sources of Help: Lecture notes, cse 30 website, texbook. 
  */ 
 
@@ -24,7 +24,7 @@
 void outputCharNTimes( char ch, int n ) {
   int i;  
   
-  // Print the charcater parameter n times
+  // Print the character using outputChar n times
   for ( i = 0; i < n; i++ ) {
     outputChar( ch );
   }

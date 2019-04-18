@@ -2,7 +2,7 @@
  * Filename: isDividable.s
  * Author: Matt Roth 
  * UserId: cs30xgs
- * Date: April 12, 2019
+ * Date: April 17, 2019
  * Sources of Help: Textbook, lecture notes, and discussion section notes.
  *
  */
@@ -31,13 +31,13 @@
  * Return Value: -1 if error, 1 if dividable, 0 if not dividable.
  *
  * Registers used:
- *	r0 - arg 1 -- the dividend of the expressionand the return value.
+ *	r0 - arg 1 -- the dividend of the expression and the return value.
  *	r1 - arg 2 -- the divisor of the expression. 
  */
 
 isDividable:
 @ Standard prologue
- 	push	{fp, lr}		@ Save registers: fp, lr
+	push	{fp, lr}		@ Save registers: fp, lr
 	add	fp, sp, FP_OFFSET	@ Set fp to base of saved registers
 					@ Uses 4, from (#_of_regs_saved - 1)*4.
 

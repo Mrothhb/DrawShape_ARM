@@ -2,7 +2,7 @@
  * Filename: intervalContains.s
  * Author: Matt Roth 
  * UserId: cs30xgs
- * Date: April 12, 2019
+ * Date: April 17, 2019
  * Sources of Help: Textbook, lecture notes, and discussion section notes.
  *
  */
@@ -40,7 +40,7 @@
 
 intervalContains:
 @ Standard prologue
- 	push	{fp, lr}		@ Save registers: fp, lr
+	push	{fp, lr}		@ Save registers: fp, lr
 	add	fp, sp, FP_OFFSET	@ Set fp to base of saved registers
 					@ Uses 4, from (#_of_regs_saved - 1)*4.
 	cmp	r0, r1			@ comparison between the parameters
@@ -56,7 +56,7 @@ intervalContains:
 	bgt	done			@ return and exit
 
 	mov	r0, 1			@ value is between the interval 
-done: 
+done:
 					@ return and exit 
 @ Standard epilogue
 	sub	sp, fp, FP_OFFSET	@ Set sp to top of saved registers
