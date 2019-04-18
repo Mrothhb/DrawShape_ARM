@@ -1,0 +1,18 @@
+Running tests for testOutputChar...
+Done running tests!
+   ^   
+  /a\  
+ /aaa\ 
+/aaaaa\
+|aa|aa|
+|aa|aa|
+\aa\aa/
+ \aa\/ 
+ /\aa\ 
+/aa\aa\
+|aa|aa|
+|aa|aa|
+\aaaaa/
+ \aaa/ 
+  \a/  
+   v   
