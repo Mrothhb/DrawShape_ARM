@@ -1,7 +1,7 @@
 /*
  * Filename: README
  * Author: Matt Roth 
- * Userid: cs30x99
+ * Userid: cs30xgs
  * Date: April 12, 2019
  * Sources of help: Harris Textbook, lecture notes, discussion notes, website
  */
@@ -113,7 +113,7 @@ VimDiff Questions
 
 1. Q: Spot the 3 differences between average3V1.s and average3V3.s using 
    vimdiff and document them as the answer to this README question. Be clear 
-   about the location of the differences.
+   about the location of the differences. 
    A: The three differences between the average3V1.s and average3V2.s is
       1) at line 42 in average3V2.s is missing the line: add fp,sp,FP_OFFSET
       2) at line 48 in average3V2.s there is an extra tab indentation

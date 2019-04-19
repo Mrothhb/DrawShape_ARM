@@ -34,13 +34,14 @@ void testoutputCharNTimes() {
   outputCharNTimes( 'a', 0 );     // test zero times case  
   outputCharNTimes( '\0', 10);    // test the null character
   outputCharNTimes( '\n', 10);    // test the newline character  
-
+/*
   // all ASCII chars in sequence acsending 
   for (i = 33; i < 128; i++) {  
     outputCharNTimes(i, j);
     outputChar('\n');
     j++;
   }
+  */
 }
 
 

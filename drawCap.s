@@ -70,7 +70,7 @@
 
 drawCap:
 @ Standard prologue
- 	push	{fp, lr}			@ Save registers: fp, lr
+	push	{fp, lr}			@ Save registers: fp, lr
 	add	fp, sp, FP_OFFSET		@ Set fp to base of saved 
 						@ registers
 						@ Uses 4, from 
@@ -128,7 +128,7 @@ direction_else:
 						@ tpChar variable in memory
 	mov	r3, BACK_SLASH_CHAR		@ move '\' char into r3
 	str	r3, [fp, L_SLASH_CHAR_OFFSET]	@ store the '\' value in the 
-						@ leftSlashChar variabl in 
+						@ leftSlashChar variable in 
 						@ memory 
 	mov	r3, FORWARD_SLASH_CHAR		@ move the '/' into r3
 	str	r3, [fp, R_SLASH_CHAR_OFFSET]	@ store the '/' into memory
@@ -221,6 +221,7 @@ final_output_end_if:
 end_loop:
 
 @ Standard epilogue
-	sub	sp, fp, FP_OFFSET	@ Set sp to top of saved registers
-	pop	{fp, pc}		@ Restore fp; restore lr into pc for
-					@  return 
+	sub	sp, fp, FP_OFFSET		@ Set sp to top of saved 
+						@ registers
+	pop	{fp, pc}			@ Restore fp; restore lr into
+						@ pc for return 
