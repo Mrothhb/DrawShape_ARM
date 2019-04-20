@@ -2,7 +2,7 @@
  * Filename: drawCrissCross.c
  * Author: Matt Roth
  * UserId: cs30xgs
- * Date: April 12, 2019
+ * Date: April 12 TODO, 2019
  * Sources of Help: Textbook, cse 30 wbesite, lecture notes, discussion notes.
  */
 

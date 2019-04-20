@@ -2,7 +2,7 @@
  * Filename: README
  * Author: Matt Roth 
  * Userid: cs30xgs
- * Date: April 12, 2019
+ * Date: April 24, 2019
  * Sources of help: Harris Textbook, lecture notes, discussion notes, website
  */
 
@@ -114,10 +114,12 @@ VimDiff Questions
 1. Q: Spot the 3 differences between average3V1.s and average3V3.s using 
    vimdiff and document them as the answer to this README question. Be clear 
    about the location of the differences. 
-   A: The three differences between the average3V1.s and average3V2.s is
-      1) at line 42 in average3V2.s is missing the line: add fp,sp,FP_OFFSET
-      2) at line 48 in average3V2.s there is an extra tab indentation
-      3) at line 56 in average3V2.s the {pc,fp} is swapped ( should be {fp,pc})
+   A: The three differences between the average3V1.s and average3V3.s is
+      1) at line 17 in both average3V1.s and average3V3.s, average3V1.s contains
+      a whitespace after .global before average3, whereas the average3V3.s file
+      contains a tab ^I in the same place.
+      2) at line 49 in average3V1.s there is an extra tab indentation.
+      3) at line 59 in average3V3.s contains a newline.
      
 C Questions
 
@@ -160,5 +162,5 @@ Git Questions
    of a file and the version last committed?
    A: use the command:  git diff HEAD^ HEAD [filename] 
 
-
+i
 

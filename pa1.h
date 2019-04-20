@@ -52,7 +52,6 @@ void drawCrissCross(int size, char fillChar);
 void drawCoolS(int size, char fillChar);
 void outputCharNTimes(char ch, int n);
 void drawCap(int size, char fillChar, int direction);
-void drawStraight(int size, char fillChar);
 
 // EC prototypes
 int sumOfDigits(int size, int base);

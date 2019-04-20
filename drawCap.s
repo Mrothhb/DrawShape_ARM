@@ -59,12 +59,12 @@
  * Parameters: size - the size of the Cool S
  	       fillChar -  the fill in character 
 	       direction - which orientation the cap will be
- * Side Effects: None.
+ * Side Effects: The Cap of Cool S is printed to stdout.
  * Error Conditions: None.
  * Registers used:
- *	r0 - arg 1 -- the parameter size, and return value.
- *	r1 - arg 2 -- the parameter fillChar.
- *	r2 - arg 3 -- the parameter direction.
+ *	r0 - arg 1 -- the parameter size of the Cool S Cap.
+ *	r1 - arg 2 -- the parameter fillChar character inside of the Cap.
+ *	r2 - arg 3 -- the parameter direction to draw the Cap in.
  *	r3 - temporary storage register for algorithms and computational tasks.
  */
 
@@ -93,8 +93,8 @@ drawCap:
 	str	r3, [fp, CAP_SIZE_OFFSET]	@ store the capsize on stack
 
 @ Start drawing the top Cap
-	ldr	r3, [fp, DIRECTION_OFFSET]	@ load the direction variable 
-	cmp	r3, DIR_UP	 		@ if(direction == DIR_UP)
+	ldr	r3, [fp, DIRECTION_OFFSET]	@ get current value of direction
+	cmp	r3, DIR_UP	 		@ if( direction == DIR_UP )
 						@ (backward logic) 
 	bne	direction_else			@ branch if not equal 
 @ Start if block 	
@@ -104,50 +104,41 @@ drawCap:
 	mov	r3, FORWARD_SLASH_CHAR		@ move the '/' into r3
 	str	r3, [fp, L_SLASH_CHAR_OFFSET] 	@ store the '/' in memory at 
 						@ the leftSlashChar variable
-	mov 	r3, BACK_SLASH_CHAR		@ move the '\' into r3
+	mov	r3, BACK_SLASH_CHAR		@ move the '\' into r3
 	str	r3, [fp, R_SLASH_CHAR_OFFSET] 	@ store the '\' into memory at
 						@ the rightSlashChar variable
-	mov 	r3, 0				@ move to initialize the itertr.
-	str	r3, [fp, START_ITER_OFFSET]	@ store iterator in memory with
-						@ initial value of zero
-	mov	r3, 0				@ initialize r3 with 0
-	ldr	r3, [fp, CAP_SIZE_OFFSET]	@ load the cap size into r3
-	add	r3, r3, 1			@ add 1 to the cap size and 
-						@ store into the endIter var
-	str	r3, [fp, END_ITER_OFFSET]	@ store the initialized end of
-						@ iterator into memory 
+	mov	r3, 0				@ move to initialize the itertr.
+	str	r3, [fp, START_ITER_OFFSET]	@ iterator = 0;
+	
+	mov	r3, 0				@ move 0 into r3 register
+	ldr	r3, [fp, CAP_SIZE_OFFSET]	@ capSize = 0;
+	add	r3, r3, 1			@ capSize + 1;
+	str	r3, [fp, END_ITER_OFFSET]	@ iter = capSize + 1; 
+
 	mov	r3, 1				@ move 1 into the r3 register
-	str	r3, [fp, INCR_OFFSET]		@ store the increment value in
-						@ memory
+	str	r3, [fp, INCR_OFFSET]		@ incr = 1;
 	b	direction_end_if		@ branch to skip the else block
 
 @ Start else block Drawing bottom of cap	
 direction_else:
 	mov	r3, V_CHAR			@ move the 'v' char into r3
-	str	r3, [fp, TIP_CHAR_OFFSET]	@ store the char 'v' into the
-						@ tpChar variable in memory
+	str	r3, [fp, TIP_CHAR_OFFSET]	@ tipChar = 'v';
 	mov	r3, BACK_SLASH_CHAR		@ move '\' char into r3
-	str	r3, [fp, L_SLASH_CHAR_OFFSET]	@ store the '\' value in the 
-						@ leftSlashChar variable in 
-						@ memory 
+	str	r3, [fp, L_SLASH_CHAR_OFFSET]	@ lefSlashChar = '\';
 	mov	r3, FORWARD_SLASH_CHAR		@ move the '/' into r3
-	str	r3, [fp, R_SLASH_CHAR_OFFSET]	@ store the '/' into memory
-						@ at the rightSlashChar variable
+	str	r3, [fp, R_SLASH_CHAR_OFFSET]	@ rightSlashChar = '/';
 	ldr	r3, [fp, CAP_SIZE_OFFSET]	@ load the capsize into r3
-	str	r3, [fp, START_ITER_OFFSET]	@ store the capsize offset into
-						@ the startIter variable in 
-						@ memory
+	str	r3, [fp, START_ITER_OFFSET]	@ startIter = capSize 
 	mov	r3, -1				@ move -1 into the r3 register
-	str	r3, [fp, END_ITER_OFFSET]	@ store -1 into the endIter
-						@ variable into memory
-	mov	r3, -1				@ inrr = -1;		
-	str	r3, [fp, INCR_OFFSET]		@ store -1 into the increment
+	str	r3, [fp, END_ITER_OFFSET]	@ endIter = -1;
+	mov	r3, -1				@ move -1 into r3		
+	str	r3, [fp, INCR_OFFSET]		@ incr = -1;
 
-@ end of direction if-else block		
+@ End of direction if-else block		
 direction_end_if:
 
 @ Start drawing the Cap 
-	ldr	r3, [fp, START_ITER_OFFSET]	@ load the startIter variable 
+	ldr	r3, [fp, START_ITER_OFFSET]	@ load the startIter variable
 						@ from memory into r3 
 	str	r3, [fp, I_OFFSET]		@ store the r3 value containing
 	 					@ i = startItr;
@@ -161,22 +152,23 @@ direction_end_if:
 
 loop:
 @ loop body - draw leading whitespace
-	mov	r0, SPACE_CHAR			@ the first parameter to 
+	mov	r0, SPACE_CHAR			@ the first parameter to
 						@ outputCharNTimes
 	ldr	r1, [fp, CAP_SIZE_OFFSET]	@ load in capSize variable
 	ldr	r3, [fp, I_OFFSET]		@ load i into r3
 	sub	r1, r1, r3			@ capSize - i
 
-	bl	outputCharNTimes		@ branch to outputCharNTimes 
+	bl	outputCharNTimes		@ branch to outputCharNTimes
 						@ outputCharNTimes(SPACE_CHAR,
 						@		capSize - i);
 
 @ Draw the actual content, conditionally the tip
 	ldr	r3, [fp, I_OFFSET]		@ load i into r3
 	cmp	r3, 0				@ if (i == 0)
-	bne	final_output_else		@ skip to else 
+	bne	final_output_else		@ skip to else
+
 	ldr	r0, [fp, TIP_CHAR_OFFSET]	@ load tipChar variable into r0
-	bl	outputChar			@ outputChar(tipChar)
+	bl	outputChar			@ outputChar( tipChar );
 	b	final_output_end_if		@ skip else block	
 
 final_output_else:
