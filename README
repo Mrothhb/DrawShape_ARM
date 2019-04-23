@@ -8,11 +8,29 @@
 
 ------------------------------------------------------------[  DESCRIPTION  ]--
 
-This program takes in 2 inputs from the command line and prints a Cool S 
-design to stdout. The first input will be the size of the Cool S (4n + 3) is
-the designated format for size, and the second input will be the character to 
-display inside of the Cool S. 
+This program takes in 2 arguments from the command line and prints a Cool S 
+design to stdout. The first input will be the size of the Cool S in the format 
+(4n + 3) for size, and the second input will be the character to display inside 
+of the Cool S ( e.g. 'a', '#', etc. ). 
 
+Example: ./pa1 7 'a'
+
+	   ^   
+ 	  /a\  
+	 /aaa\ 
+	/aaaaa\
+	|aa|aa|
+	|aa|aa|
+	\aa\aa/
+	 \aa\/ 
+  	 /\aa\ 
+	/aa\aa\
+	|aa|aa|
+	|aa|aa|
+	\aaaaa/
+	 \aaa/ 
+ 	  \a/  
+ 	   v 
 ------------------------------------------------------------[  COMPILATION  ]--
 
 Compilation is made easy through the use of the Make utility. A file included
@@ -20,7 +38,7 @@ with the source called Makefile specifies how to derive the target program.
 
 To compile the program, simply do the following in a Linux terminal:
 
-	$ make 
+	$make 
 
 If generating new .o files for execution use the following command:
 
@@ -38,75 +56,74 @@ To run the program after make has finished, type the following:
 
 An example of normal output... (on stdout)
 
-$ ./a.out 1 3 5
+Argument #1 should be an integer value in the form of 4n+3
+Argument #2 should be a single character in the form $'a'
 
-1
-3
-5
-7
-9
-11
-13
-15
-17
-19
-21
-23
-25
-27
-29
+$ ./pa1 7 $'a'
 
-29
-27
-25
-23
-21
-19
-17
-15
-13
-11
-9
-7
-5
-3
-1
+   ^   
+  /a\  
+ /aaa\ 
+/aaaaa\
+|aa|aa|
+|aa|aa|
+\aa\aa/
+ \aa\/ 
+ /\aa\ 
+/aa\aa\
+|aa|aa|
+|aa|aa|
+\aaaaa/
+ \aaa/ 
+  \a/  
+   v  
 
-1
-3
-5
-7
-9
-11
-13
-15
-17
-19
-21
-23
-25
-27
-29
 
-The integer average of (1 + 3 + 5) / 3 = 3
+Examples of abnormal output... (on stderr)
 
-An example of abnormal output... (on stderr)
+$ ./pa1 7
 
-$ ./a.out 1 2
+	Usage: ./pa1 size fillChar
+  	size: equal to the maximum width of the Cool S
+  	  -- must be in the interval [3, 103]
+   	 -- must be of the form (size = 4n + 3)
+         where n is some integer
+  	fillChar: used for filling in the Cool S
+  	  -- must be a single character
+   	 -- must be within the ASCII range [32, 126]
 
-Usage: ./a.out v1 v2 v3
-Prints arrays forward and in reverse, prints the average of v1, v2, v3
+$ ./pa1 5 $'a'
 
+	Error: size must be an integer of the format 4n + 3
+
+$ ./pa1 7 '\a'
+
+	Error: fillChar must be a single char
+
+$ ./pa1 300 'a'
+
+	Error: size must be within the range [3, 103]
+
+$ ./pa1 8a '$'
+
+	Error: size must be an integr in base 10
+
+$ ./pa1 99999999999999999999 a
+	
+	Error when converting size (999....) into base 10: Numerical result out
+	of range
 ------------------------------------------------------------[    TESTING    ]--
 
-I tested my program by comparing its output against the pa0test solution 
+I tested my program by comparing its output against the pa1test solution 
 contained in the public directory.
 
 Some specific test cases I tried on the executable:
-  * Negative numbers
-  * Very small / very large numbers to test number parsing range
+  * Out of range size
+  * Size not in the form 4n+3
+  * Negative size value
+  * ASCII values and chars outside of the range
   * Inputting too few arguments or too many arguments
-  * Numbers with non-digit characters, e.g. ab23, or abs#$
+  * Size with non-digit characters, e.g. a, or #$
 
 ------------------------------------------------------------[   QUESTIONS   ]--
 VimDiff Questions
@@ -160,7 +177,47 @@ Git Questions
 
 9. Q: What is the Git command to display differences between the local version
    of a file and the version last committed?
-   A: use the command:  git diff HEAD^ HEAD [filename] 
+   A: use the command:  git diff HEAD [filename]
 
-i
+GDB Questions
 
+10. Q: How do you print the value of the string that is the 1st arg in strtol?  
+    (The value should be "19Spring").
+    A: print nptr
+
+11. Q: How do you print the hex value of &endptr that is the 2nd arg in strtol?
+    A: print/x endptr
+
+12. Q: How do you print the value returned by strtol? (The value should be 19) 
+    Show two ways:
+    a.
+    Using the name of the local variable you use to hold the return value
+    b.
+    Displaying the value in the register used to return the value. 
+    A: a. print result 
+       b. print $r0
+     
+13. Q: How do you print the character endptr is pointing to? (Should be the
+    character 'S') 
+    A: print endptr[0]
+  
+14. Q: How do you print the entire null-terminated string endptris pointing to? 
+    (Should be "Spring")
+    A: print endptr
+   
+15. Q: How do you print the decimal value of the global variable errno at this
+    point? 
+    A: print errno
+
+16. Q: What was your process for completing this assignment with integrity?
+    A: Honest -- submitted work that is a truthful demonstration of your 
+    knowledge and abilities (rather than the knowledge and abilities of another)
+    Responsible -- managed my time so that im not pressured to complete an 
+    assignment at the last minute.
+    Respectful -- Acknowledge the contributions of others to your work by citing
+    them when you've used their words or ideas.
+    Fair -- Completed academic work according to stated standards and 
+    expectations even when it takes longer or struggling.
+    Trustworthy -- Trusted to be honest, responsible, respectful and fair even 
+    when no one is watching me. 
+    

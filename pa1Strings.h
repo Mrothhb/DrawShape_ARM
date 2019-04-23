@@ -2,10 +2,9 @@
  * Filename: pa1Strings.h
  * Author: Matt Roth  
  * UserId: cs30xgs
- * Date: TODO
+ * Date: April 24, 2019
  * Sources of help: Given.
  */
-
 #ifndef PA1_STRINGS_H
 #define PA1_STRINGS_H
 

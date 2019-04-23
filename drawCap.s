@@ -2,11 +2,10 @@
  * Filename: drawCap.s
  * Author: Matt Roth 
  * UserId: cs30xgs
- * Date: April TODO, 2019
+ * Date: April 24, 2019
  * Sources of Help: Textbook, lecture notes, and discussion section notes.
  *
  */
-
 @ Raspberry Pi directives
 	.cpu	cortex-a53			@ Version of our Pis
 	.syntax	unified				@ Modern ARM syntax
@@ -44,7 +43,6 @@
 
 	.global	drawCap				@ Specify drawCap as a global 
 						@ symbol
-
 	.text					@ Switch to Text segment 
 						@ Align on evenly divisible by 
 						@ 4 byte address
@@ -78,7 +76,6 @@ drawCap:
 @ Allocate space on the stack for local vars. Keep sp evenly divisible by 8.
 	sub	sp, sp, LOCAL_VAR_SPACE		@ allocate space for 8 local 
 						@ variables
-
 @ Allocate space on stack for incoming parameters.
 	sub	sp, sp, PARAM_SPACE		@ allocate space for 3 params
 
@@ -91,7 +88,6 @@ drawCap:
 	mov	r2, HALF_DIVISOR		@ move 2 into r3 for division
 	sdiv	r3, r3, r2			@ divide size / 2
 	str	r3, [fp, CAP_SIZE_OFFSET]	@ store the capsize on stack
-
 @ Start drawing the top Cap
 	ldr	r3, [fp, DIRECTION_OFFSET]	@ get current value of direction
 	cmp	r3, DIR_UP	 		@ if( direction == DIR_UP )

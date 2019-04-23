@@ -2,7 +2,7 @@
  * Filename: pa1.h
  * Author: Matt Roth
  * UserId: cs30xgs
- * Date: TODO
+ * Date: April 24, 2019
  * Sources of help: Given.
  */
 
@@ -15,7 +15,7 @@
 #define FORWARD_SLASH_CHAR '/'
 #define PIPE_CHAR          '|'
 #define BACK_SLASH_CHAR    '\\'
-
+#define NULL_CHAR          '\0'
 // Cool S cap directions
 #define DIR_UP   0
 #define DIR_DOWN 1

@@ -53,12 +53,12 @@ int main( int argc, char * argv[] ) {
   if( errno ) {
     snprintf( errStr , BUFSIZ, SIZE_CONVERT_ERR, argv[SIZE_IDX], BASE );
     perror( errStr );
-    fprintf( stderr,"\n");
+    fprintf( stderr, "%c", NEWLINE_CHAR);
     return EXIT_FAILURE;
   }
 
   // The size contains non-numerical characters print to stderr and return 
-  if( *endPtr != '\0' ) {
+  if( *endPtr != NULL_CHAR ) {
     fprintf( stderr, SIZE_NOT_INT_ERR, BASE );
     return EXIT_FAILURE;
   }
