@@ -59,7 +59,7 @@ int main( int argc, char * argv[] ) {
 
   // The size contains non-numerical characters print to stderr and return 
   if( *endPtr != NULL_CHAR ) {
-    fprintf( stderr, SIZE_NOT_INT_ERR, BASE );
+    fprintf( stderr, SIZE_NOT_INT_ERR, BASE )
     return EXIT_FAILURE;
   }
 

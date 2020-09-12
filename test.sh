@@ -4,7 +4,7 @@ chr() {
 }
 letter=0;
 n=0;
-for i in `seq 32 127`; 
+for i in `seq 0 127`; 
 do
 	letter=$(chr "$i")
 	for i in `seq 0 25`;
